@@ -18,7 +18,7 @@ public class JmsConfig {
 	private String brokerUrl="tcp://localhost:8090";
 	
 	@Bean
-	public DefaultJmsListenerContainerFactory empJmsContFactory() {
+	public DefaultJmsListenerContainerFactory jmsContFactory() {
 		DefaultJmsListenerContainerFactory containerFactory = new DefaultJmsListenerContainerFactory();
 		containerFactory.setPubSubDomain(true);
 		containerFactory.setConnectionFactory(connectionFactory());
@@ -33,10 +33,9 @@ public class JmsConfig {
 		ActiveMQConnectionFactory activeMQConnFactory = new ActiveMQConnectionFactory();
 		activeMQConnFactory.setBrokerURL(brokerUrl);
 		factory.setTargetConnectionFactory(activeMQConnFactory);
-		//factory.setClientId("client123");
+		factory.setClientId("student-ws");
 		return factory;
 	}
-	
 	
 	@Bean
 	public MessageConverter jacksonJmsMessageConverter() {

@@ -17,6 +17,7 @@ public class StudentFreeSemesterQueryFromServerConsumer {
 
 	@JmsListener(destination = "freesemesterqueryfromserver")
 	public void onStudentFreeSemesterQueryFromServer(StudentFreeSemesterQuery fsq) {
+		System.out.println("WS: "+fsq);
 		fsq.setFreeSemester(semesterServiceImpl.getFreeSemesterByIdentifier(fsq.getIdentifier()));
 		this.jmsTemplate.convertAndSend(fsq.getReplyTopicName(), fsq);
 	}
