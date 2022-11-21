@@ -19,6 +19,7 @@ public class StudentFreeSemesterQueryFromServerConsumer {
 	public void onStudentFreeSemesterQueryFromServer(StudentFreeSemesterQuery fsq) {
 		System.out.println("WS: "+fsq);
 		fsq.setFreeSemester(semesterServiceImpl.getFreeSemesterByIdentifier(fsq.getIdentifier()));
+		this.jmsTemplate.setPubSubDomain(true);
 		this.jmsTemplate.convertAndSend(fsq.getReplyTopicName(), fsq);
 	}
 
